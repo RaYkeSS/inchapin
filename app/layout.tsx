@@ -1,34 +1,35 @@
+import { ReactNode } from "react";
+
 import type { Metadata } from "next";
-import localFont from 'next/font/local'
-import {ReactNode} from "react";
+import localFont from "next/font/local";
 
 import "./globals.css";
 
 const proximaNova = localFont({
   src: [
     {
-      path: '../public/fonts/ProximaNova/ProximaNova-Light.woff2',
-      weight: '300',
-      style: 'normal',
+      path: "../public/fonts/ProximaNova/ProximaNova-Light.woff2",
+      weight: "300",
+      style: "normal",
     },
     {
-      path: '../public/fonts/ProximaNova/ProximaNova-Regular.woff2',
-      weight: '400',
-      style: 'normal',
+      path: "../public/fonts/ProximaNova/ProximaNova-Regular.woff2",
+      weight: "400",
+      style: "normal",
     },
     {
-      path: '../public/fonts/ProximaNova/ProximaNova-Semibold.woff2',
-      weight: '600',
-      style: 'normal',
+      path: "../public/fonts/ProximaNova/ProximaNova-Semibold.woff2",
+      weight: "600",
+      style: "normal",
     },
     {
-      path: '../public/fonts/ProximaNova/ProximaNova-Bold.woff2',
-      weight: '700',
-      style: 'normal',
+      path: "../public/fonts/ProximaNova/ProximaNova-Bold.woff2",
+      weight: "700",
+      style: "normal",
     },
   ],
-  variable: '--font-proxima-nova',
-})
+  variable: "--font-proxima-nova",
+});
 
 export const metadata: Metadata = {
   title: "INCHAPIN",
@@ -41,10 +42,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html
-      lang="ru"
-      className={`${proximaNova.variable}`}
-    >
+    <html lang="ru" className={`${proximaNova.variable}`}>
       <body className="">{children}</body>
     </html>
   );
