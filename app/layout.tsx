@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
-import "./globals.css";
+import "~/styles/globals.scss";
 
 const proximaNova = localFont({
   src: [
@@ -43,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className={`${proximaNova.variable}`}>
-      <body className="">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

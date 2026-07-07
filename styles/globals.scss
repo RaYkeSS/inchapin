@@ -1,0 +1,22 @@
+@use "variables" as *;
+
+:root {
+  --background: #{$background};
+  --foreground: #{$foreground};
+  --brand: #{$brand};
+  --muted: #{$muted};
+  --brand-hover: #{$brand-hover};
+  --brand-tint: #{$brand-tint};
+}
+
+* { box-sizing: border-box; }
+
+html {
+  font-family: var(--font-proxima-nova), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+}
