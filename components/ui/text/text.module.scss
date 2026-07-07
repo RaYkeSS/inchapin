@@ -1,0 +1,74 @@
+@use "styles/mixins" as *;
+
+.text {
+  display: inline;
+  margin: 0;
+  color: var(--foreground);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.colorAccent { color: var(--brand); }
+.colorMuted  { color: var(--muted); }
+
+.sizeTagline {
+  font-size: 1.625rem;
+  line-height: 1.4;
+  @include xxl { font-size: 1.9375rem; }
+  @include lg  { font-size: 1.1875rem; }
+  @include sm  { font-size: 0.8125rem; line-height: 1.5; }
+}
+
+.sizeNote {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  @include xxl { font-size: 1.0625rem; }
+  @include lg  { font-size: 0.6875rem; }
+  @include md  { font-size: 0.6875rem; }
+  @include sm  { font-size: 0.6875rem; }
+}
+
+.sizeCaption {
+  font-size: 1.625rem;
+  line-height: 1.4;
+  @include xxl { font-size: 2.125rem; }
+  @include lg  { font-size: 1.1875rem; }
+  @include md  { font-size: 1.1875rem; }
+  @include sm  { font-size: 1rem; line-height: 1.5; }
+}
+
+.sizeParagraph {
+  font-size: 1rem;
+  line-height: 1.6;
+  @include xxl { font-size: 1.25rem; }
+  @include lg  { font-size: 0.75rem; }
+  @include md  { font-size: 0.75rem; line-height: 1.8; }
+  @include sm  { font-size: 0.6875rem; line-height: 1.8; }
+}
+
+.sizeDescription {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  @include xxl { font-size: 0.875rem; }
+  @include lg  { font-size: 0.6875rem; }
+  @include md  { font-size: 0.6875rem; line-height: 1.6; }
+  @include sm  { font-size: 0.75rem; line-height: 1.6; }
+}
+
+.sizeVideoTitle {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  @include xxl { font-size: 1.125rem; }
+  @include lg  { font-size: 0.625rem; }
+  @include md  { font-size: 0.625rem; }
+  @include sm  { font-size: 0.625rem; }
+}
+
+.sizeVideoTime {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  @include xxl { font-size: 1.125rem; }
+  @include lg  { font-size: 0.625rem; }
+  @include md  { font-size: 0.625rem; }
+  @include sm  { font-size: 0.625rem; }
+}
