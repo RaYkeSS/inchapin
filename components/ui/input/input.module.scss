@@ -1,0 +1,39 @@
+.field {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.input {
+  width: 100%;
+  padding: 1.1em 0.3em 0.45em;
+  border: none;
+  border-bottom: 1px solid var(--muted);
+  background: transparent;
+  color: var(--foreground);
+  font-size: 1em;
+  outline: none;
+  &::placeholder { color: var(--muted); }
+}
+
+.label {
+  position: absolute;
+  left: 0.3em;
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: left center;
+  color: var(--foreground);
+  font-size: 1em;
+  pointer-events: none;
+  transition: transform 0.18s ease, font-size 0.18s ease, top 0.18s ease;
+}
+
+//Поднятие лейбла при фокусе \ с контентом
+.field:focus-within .label,
+.input:not(:placeholder-shown) ~ .label {
+  top: 0.2em;
+  transform: translateY(0) scale(0.82);
+  font-size: 0.825em;
+}
