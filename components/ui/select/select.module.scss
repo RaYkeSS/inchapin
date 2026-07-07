@@ -1,0 +1,144 @@
+/*
+  react-select is rendered with `unstyled` + `classNames`, but its emotion
+  classes still leak through at single-class specificity and win by cascade
+  order. Every rule below is scoped under `.wrap` (specificity 0,2,0) so the
+  module reliably wins. Only the properties we own are declared; react-select's
+  functional layout (grid value-container, inline-grid input autogrow) is left
+  untouched by not redeclaring `display` there. Colors come exclusively from the
+  CSS custom properties in globals.scss.
+*/
+.wrap {
+  width: 100%;
+
+  .container {
+    position: relative;
+    width: 100%;
+  }
+
+  /* ---- control (the pill trigger) ---- */
+  .control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2rem;
+    padding: 0 0.625rem;
+    border: 1px solid var(--brand);
+    border-radius: 9999px;
+    background: var(--brand);
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+    &:hover,
+    &:active {
+      background: var(--brand-hover);
+      border-color: var(--brand-hover);
+    }
+  }
+
+  .controlActive {
+    background: var(--brand-hover);
+    border-color: var(--brand-hover);
+  }
+
+  .valueContainer {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .placeholder,
+  .singleValue {
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .input {
+    color: #fff;
+    & input {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      outline: none;
+      font: inherit;
+    }
+  }
+
+  .indicatorsContainer {
+    flex-shrink: 0;
+  }
+
+  .indicatorSeparator {
+    display: none;
+  }
+
+  .dropdownIndicator,
+  .clearIndicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: #fff;
+    cursor: pointer;
+    & svg {
+      width: 1rem;
+      height: 1rem;
+      fill: currentColor;
+    }
+  }
+
+  .dropdownIndicatorOpen {
+    transform: rotate(180deg);
+  }
+
+  /* ---- menu ---- */
+  .menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin: 0.25rem 0;
+    z-index: 10;
+    background: var(--background);
+    border: 1px solid var(--muted);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+
+  .menuList {
+    max-height: 200px;
+    padding: 0.25rem;
+    overflow-y: auto;
+  }
+
+  .option {
+    padding: 0.375rem 0.5rem;
+    border-radius: 0.25rem;
+    color: var(--foreground);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: background-color 0.12s ease, color 0.12s ease;
+    &:hover {
+      background: var(--brand-tint);
+      color: var(--brand);
+    }
+  }
+
+  .optionFocused {
+    background: var(--brand-tint);
+    color: var(--brand);
+  }
+
+  .optionSelected {
+    background: var(--brand);
+    color: #fff;
+    &:hover {
+      background: var(--brand-hover);
+      color: #fff;
+    }
+  }
+}
