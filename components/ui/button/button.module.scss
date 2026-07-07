@@ -1,0 +1,90 @@
+@use "styles/mixins" as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: background-color 0.18s ease, color 0.18s ease, opacity 0.18s ease;
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.sizeXl {
+  height: 3.875rem;
+  padding: 0 4.3125rem;
+  font-size: 0.875rem;
+
+  @include xxl {
+    height: 3.9375rem;
+    padding: 0 4.3125rem;
+    font-size: 0.9375rem;
+  }
+  @include lg  {
+    height: 3.375rem;
+    padding: 0 2.5rem;
+    font-size: 0.875rem;
+  }
+  @include md  {
+    height: 3.375rem;
+    padding: 0 2.5rem;
+    font-size: 0.875rem;
+  }
+  @include sm  {
+    height: 2.9375rem;
+    padding: 0 3.125rem;
+    font-size: 0.6875rem;
+  }
+}
+
+.sizeMd {
+  height: 2.6875rem;
+  padding: 0 1rem;
+  font-size: 0.8125rem;
+
+  @include xxl {
+    height: 3.1875rem;
+    font-size: 0.9375rem;
+  }
+  @include lg  {
+    height: 2.6875rem;
+    font-size: 0.75rem;
+  }
+  @include md  {
+    height: 2.6875rem;
+    font-size: 0.75rem;
+  }
+  @include sm  {
+    height: 2.5625rem;
+    font-size: 0.75rem;
+  }
+}
+
+.variantPrimary {
+  background: var(--brand-hover);
+  color: var(--foreground);
+  &:hover { background: var(--brand-hover); }
+}
+
+.variantSecondary {
+  background: transparent;
+  color: var(--brand);
+  &:hover { background: var(--brand-tint); }
+}
+
+.variantLink {
+  background: transparent;
+  color: var(--foreground);
+  &:hover { background: var(--brand-tint); }
+}
