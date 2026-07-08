@@ -1,0 +1,125 @@
+@use "styles" as *;
+
+.apartmentsPage {
+  padding-top: var(--header-height);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding: 3.75rem 0 3.125rem;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.eyebrowText {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--brand);
+}
+
+.title {
+  color: var(--foreground);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding-bottom: 6.25rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2.5rem;
+  min-height: 20rem;
+  padding: 2.5rem;
+  border: 1px solid var(--muted);
+  border-radius: 0.5rem;
+  background: var(--background);
+  text-decoration: none;
+  color: var(--foreground);
+  transition:
+    border-color 0.22s ease,
+    background-color 0.22s ease,
+    transform 0.22s ease;
+
+  &:hover {
+    border-color: var(--brand);
+    background: var(--brand-tint);
+    transform: translateY(-0.25rem);
+  }
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cardTitle {
+  color: var(--foreground);
+}
+
+.cardIndex {
+  color: var(--muted);
+}
+
+.cardDesc {
+  color: var(--text-muted);
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--brand);
+  font-weight: var(--font-semibold);
+  transition: gap 0.22s ease;
+}
+
+.card:hover .cardLink {
+  gap: 0.875rem;
+}
+
+@include lg-only {
+  .card {
+    min-height: 17.5rem;
+    padding: 2rem;
+  }
+}
+
+@include md-only {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    min-height: 15rem;
+    padding: 1.75rem;
+  }
+}
+
+@include sm {
+  .header {
+    gap: 1.25rem;
+    padding: 2.5rem 0 1.875rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-bottom: 3.75rem;
+  }
+  .card {
+    min-height: 0;
+    padding: 1.5rem;
+    gap: 1.75rem;
+  }
+}
