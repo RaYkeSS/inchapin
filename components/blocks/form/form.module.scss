@@ -1,0 +1,90 @@
+@use "styles" as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5625rem;
+}
+
+.acceptance {
+  text-align: center;
+  color: var(--muted);
+  padding: 0.625rem 1.875rem 0;
+  margin-bottom: -0.625rem;
+  a {
+    transition: all 0.25s ease;
+    text-decoration: underline;
+    &:hover {
+      color: var(--brand);
+    }
+  }
+}
+
+.btn {
+  margin: auto;
+  font-size: 0.9375rem;
+  height: 3.875rem;
+  max-width: 14.25rem;
+  width: 100%;
+}
+
+.success {
+  text-align: center;
+  color: var(--brand);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  padding: 0.625rem 0;
+}
+
+.error {
+  display: block;
+  text-align: center;
+  color: var(--error);
+  font-size: 0.8125rem;
+}
+
+@include xxl {
+  .form {
+    gap: 2.8125rem;
+
+    .acceptance {
+      padding: 0.3125rem 2.5rem 0;
+      margin-bottom: -0.9375rem;
+    }
+    .btn {
+      font-size: 0.9375rem;
+      max-width: 14.625rem;
+    }
+  }
+}
+
+@include max-lg {
+  .form {
+    gap: 2.5rem;
+
+    .acceptance {
+      padding: 0.625rem 0.625rem 0;
+      margin-bottom: -0.3125rem;
+    }
+    .btn {
+      font-size: 0.875rem;
+      max-width: 10.625rem;
+      height: 3.375rem;
+    }
+  }
+}
+
+@include sm {
+  .form {
+    gap: 2.125rem;
+
+    .acceptance {
+      padding: 0.625rem 0.625rem 0;
+      margin-bottom: -0.625rem;
+    }
+    .btn {
+      font-size: 0.6875rem;
+      height: 2.9375rem;
+    }
+  }
+}

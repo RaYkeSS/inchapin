@@ -1,0 +1,100 @@
+@use "styles" as *;
+
+.heroBlock {
+  --fb-height: 100dvh;
+  --fb-padding-bottom: 2.5rem;
+  --fbPic-mb: 2.5rem;
+  --fbLogo-width: 44.875rem;
+
+  height: var(--fb-height);
+  max-height: 125rem;
+  padding-bottom: var(--fb-padding-bottom);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.heroBlockPic {
+  flex: 1;
+  display: block;
+  position: relative;
+  min-height: 0;
+  margin-bottom: var(--fbPic-mb);
+}
+
+.heroBlockImg {
+  padding-top: var(--header-height);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroBlockContent {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2.5rem;
+  .heroBlockContentTitle {
+    max-width: 29.375rem;
+    color: var(--brand);
+  }
+  .heroBlockContentLogo {
+    width: var(--fbLogo-width);
+    flex-shrink: 1;
+  }
+}
+
+@include xxl {
+  .heroBlock {
+    --fb-padding-bottom: 3.9375rem;
+    --fbLogo-width: 53.875rem;
+    --fbPic-mb: 3.125rem;
+  }
+}
+
+@include lg-only {
+  .heroBlock {
+    --fb-padding-bottom: 2.1875rem;
+    --fbLogo-width: 34.625rem;
+    --fbPic-mb: 1.875rem;
+  }
+  .heroBlockContent {
+    .heroBlockContentTitle {
+      max-width: 20rem;
+      padding: 0 1.25rem;
+    }
+  }
+}
+
+@include max-md {
+  .heroBlock {
+    --fb-padding-bottom: 3.125rem;
+    --fbLogo-width: 100%;
+    --fbPic-mb: 2.5rem;
+  }
+  .heroBlockContent {
+    flex-direction: column;
+    align-items: start;
+    .heroBlockContentTitle {
+      max-width: 25rem;
+      padding: 0;
+    }
+  }
+}
+
+@include sm {
+  .heroBlock {
+    --fb-height: auto;
+    --fb-padding-bottom: 0.9375rem;
+    --fbLogo-width: 100%;
+    --fbPic-mb: 1.25rem;
+  }
+  .heroBlockContent {
+    gap: 1.25rem;
+    .heroBlockContentTitle {
+      max-width: 12.5rem;
+      padding: 0;
+    }
+  }
+}
