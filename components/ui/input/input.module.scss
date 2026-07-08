@@ -15,7 +15,9 @@
   color: var(--foreground);
   font-size: 1em;
   outline: none;
-  &::placeholder { color: var(--muted); }
+  &::placeholder {
+    color: var(--muted);
+  }
 }
 
 .label {
@@ -27,13 +29,33 @@
   color: var(--foreground);
   font-size: 1em;
   pointer-events: none;
-  transition: transform 0.18s ease, font-size 0.18s ease, top 0.18s ease;
+  transition:
+    transform 0.18s ease,
+    font-size 0.18s ease,
+    top 0.18s ease;
 }
 
-//Поднятие лейбла при фокусе \ с контентом
 .field:focus-within .label,
 .input:not(:placeholder-shown) ~ .label {
   top: 0.2em;
   transform: translateY(0) scale(0.82);
   font-size: 0.825em;
+}
+
+.fieldError {
+  padding-bottom: 0;
+}
+
+.inputError {
+  border-color: var(--error);
+  &:focus {
+    border-color: var(--error);
+  }
+}
+
+.error {
+  margin-top: 0.25rem;
+  color: var(--error);
+  font-size: 0.75rem;
+  font-weight: var(--font-semibold);
 }

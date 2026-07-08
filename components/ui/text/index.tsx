@@ -8,7 +8,7 @@ import styles from "./text.module.scss";
 
 type TextProps<T extends ElementType = "span"> = {
   as?: T;
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
 } & ComponentPropsWithoutRef<T>;
 
@@ -23,28 +23,31 @@ const textVariants = cva(styles.text, {
       caption: styles.sizeCaption,
       paragraph: styles.sizeParagraph,
       description: styles.sizeDescription,
+      note: styles.sizeNote,
+      videoTitle: styles.sizeVideoTitle,
+      videoTime: styles.sizeVideoTime,
     },
   },
 });
 
 const Text = <T extends ElementType = "span">({
-                                                as,
-                                                children,
-                                                className,
-                                                color,
-                                                size,
-                                                ...props
-                                              }: TextProps<T> & VariantProps<typeof textVariants>) => {
+  as,
+  children,
+  className,
+  color,
+  size,
+  ...props
+}: TextProps<T> & VariantProps<typeof textVariants>) => {
   const Component = as ?? "span";
 
   return (
     <Component
       className={cn(textVariants({ color, size }), className)}
-  {...props}
->
-  {children}
-  </Component>
-);
+      {...props}
+    >
+      {children}
+    </Component>
+  );
 };
 
 export { Text };

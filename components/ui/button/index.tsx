@@ -8,7 +8,7 @@ import styles from "./button.module.scss";
 
 type ButtonProps<T extends ElementType = "button"> = {
   as?: T;
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
 } & ComponentPropsWithoutRef<T>;
 

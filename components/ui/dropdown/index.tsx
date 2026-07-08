@@ -1,6 +1,12 @@
 "use client";
 
-import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import {
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { type VariantProps, cva } from "class-variance-authority";
 
@@ -8,7 +14,10 @@ import { cn } from "~/lib/utils";
 
 import styles from "./dropdown.module.scss";
 
-type RenderTrigger = (state: { open: boolean; toggle: () => void }) => ReactNode;
+type RenderTrigger = (state: {
+  open: boolean;
+  toggle: () => void;
+}) => ReactNode;
 
 const menuVariants = cva(styles.menu, {
   variants: {

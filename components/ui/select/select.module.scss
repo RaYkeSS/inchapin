@@ -1,12 +1,5 @@
-/*
-  react-select is rendered with `unstyled` + `classNames`, but its emotion
-  classes still leak through at single-class specificity and win by cascade
-  order. Every rule below is scoped under `.wrap` (specificity 0,2,0) so the
-  module reliably wins. Only the properties we own are declared; react-select's
-  functional layout (grid value-container, inline-grid input autogrow) is left
-  untouched by not redeclaring `display` there. Colors come exclusively from the
-  CSS custom properties in globals.scss.
-*/
+@use "styles/mixins" as *;
+
 .wrap {
   width: 100%;
 
@@ -15,7 +8,6 @@
     width: 100%;
   }
 
-  /* ---- control (the pill trigger) ---- */
   .control {
     display: flex;
     align-items: center;
@@ -25,14 +17,25 @@
     border: 1px solid var(--brand);
     border-radius: 9999px;
     background: var(--brand);
-    color: #fff;
+    color: var(--on-brand);
     cursor: pointer;
     outline: none;
-    transition: background-color 0.18s ease, border-color 0.18s ease;
+    transition:
+      background-color 0.18s ease,
+      border-color 0.18s ease,
+      transform 0.18s ease;
     &:hover,
     &:active {
       background: var(--brand-hover);
       border-color: var(--brand-hover);
+    }
+    &:active {
+      transform: scale(0.97);
+    }
+
+    @include hover-text-slide;
+    .animationTop {
+      color: var(--on-brand);
     }
   }
 
@@ -42,20 +45,21 @@
   }
 
   .valueContainer {
+    display: flex;
+    align-items: center;
     min-width: 0;
     overflow: hidden;
   }
 
-  .placeholder,
   .singleValue {
-    color: #fff;
+    color: var(--on-brand);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .input {
-    color: #fff;
+    color: var(--on-brand);
     & input {
       color: inherit;
       background: transparent;
@@ -79,7 +83,7 @@
     align-items: center;
     justify-content: center;
     padding: 0;
-    color: #fff;
+    color: var(--on-brand);
     cursor: pointer;
     & svg {
       width: 1rem;
@@ -121,7 +125,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
-    transition: background-color 0.12s ease, color 0.12s ease;
+    transition:
+      background-color 0.12s ease,
+      color 0.12s ease;
     &:hover {
       background: var(--brand-tint);
       color: var(--brand);
@@ -135,10 +141,10 @@
 
   .optionSelected {
     background: var(--brand);
-    color: #fff;
+    color: var(--on-brand);
     &:hover {
       background: var(--brand-hover);
-      color: #fff;
+      color: var(--on-brand);
     }
   }
 }

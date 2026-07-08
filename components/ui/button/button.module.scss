@@ -9,12 +9,19 @@
   border: 1px solid transparent;
   background-clip: padding-box;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: var(--font-semibold);
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
   outline: none;
-  transition: background-color 0.18s ease, color 0.18s ease, opacity 0.18s ease;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    opacity 0.18s ease,
+    transform 0.18s ease;
+  &:active:not(:disabled) {
+    transform: scale(0.96);
+  }
   &:disabled {
     pointer-events: none;
     opacity: 0.5;
@@ -31,17 +38,17 @@
     padding: 0 4.3125rem;
     font-size: 0.9375rem;
   }
-  @include lg  {
+  @include lg {
     height: 3.375rem;
     padding: 0 2.5rem;
     font-size: 0.875rem;
   }
-  @include md  {
+  @include md {
     height: 3.375rem;
     padding: 0 2.5rem;
     font-size: 0.875rem;
   }
-  @include sm  {
+  @include sm {
     height: 2.9375rem;
     padding: 0 3.125rem;
     font-size: 0.6875rem;
@@ -57,34 +64,40 @@
     height: 3.1875rem;
     font-size: 0.9375rem;
   }
-  @include lg  {
+  @include lg {
     height: 2.6875rem;
     font-size: 0.75rem;
   }
-  @include md  {
+  @include md {
     height: 2.6875rem;
     font-size: 0.75rem;
   }
-  @include sm  {
+  @include sm {
     height: 2.5625rem;
     font-size: 0.75rem;
   }
 }
 
 .variantPrimary {
-  background: var(--brand-hover);
-  color: var(--foreground);
-  &:hover { background: var(--brand-hover); }
+  background: var(--brand);
+  color: var(--on-brand);
+  &:hover {
+    background: var(--brand-hover);
+  }
 }
 
 .variantSecondary {
   background: transparent;
   color: var(--brand);
-  &:hover { background: var(--brand-tint); }
+  &:hover {
+    background: var(--brand-tint);
+  }
 }
 
 .variantLink {
   background: transparent;
   color: var(--foreground);
-  &:hover { background: var(--brand-tint); }
+  &:hover {
+    background: var(--brand-tint);
+  }
 }
