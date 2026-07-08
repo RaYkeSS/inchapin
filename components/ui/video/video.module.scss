@@ -1,0 +1,110 @@
+@use "styles" as *;
+
+.VideoBlock {
+  --VideoPreviewSize: 11.625rem;
+  --VideoPlaySize: 6.875rem;
+  --VideoPlayFont: 0.875rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9375rem;
+  cursor: pointer;
+  user-select: none;
+
+  .VideoInfo {
+    display: flex;
+    flex-direction: column;
+  }
+  .VideoName {
+    margin-top: 1.6em;
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+  }
+  .VideoTime {
+    color: var(--text-muted);
+  }
+  .VideoDecor {
+    height: 1px;
+    background-color: var(--muted);
+    flex-grow: 1;
+  }
+  .VideoPreview {
+    width: var(--VideoPreviewSize);
+    height: var(--VideoPreviewSize);
+    border-radius: 100%;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 100%;
+      background-color: var(--brand);
+      opacity: 30%;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 100%;
+      transition: transform 0.25s ease;
+    }
+    .VideoPlay {
+      width: var(--VideoPlaySize);
+      height: var(--VideoPlaySize);
+      border: 1px solid var(--background);
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      gap: 0.3125rem;
+      color: var(--background);
+      font-size: var(--VideoPlayFont);
+      text-transform: uppercase;
+      position: absolute;
+      z-index: 100;
+      top: calc((var(--VideoPreviewSize) - var(--VideoPlaySize)) / 2);
+      left: calc((var(--VideoPreviewSize) - var(--VideoPlaySize)) / 2);
+      transition: transform 0.25s ease;
+    }
+    &:hover .VideoPlay {
+      transform: scale(1.8);
+    }
+    &:hover .img {
+      transform: scale(1.1);
+    }
+
+    &:active .VideoPlay {
+      transform: scale(1.5);
+    }
+    &:active .img {
+      transform: scale(1.2);
+    }
+  }
+
+  @include sm {
+    --VideoPreviewSize: 8.1875rem;
+    --VideoPlaySize: 4.8125rem;
+    --VideoPlayFont: 0.625rem;
+  }
+
+  @include max-lg {
+    --VideoPreviewSize: 8.3125rem;
+    --VideoPlaySize: 4.9375rem;
+    --VideoPlayFont: 0.625rem;
+  }
+
+  @include xxl {
+    --VideoPreviewSize: 15.0625rem;
+    --VideoPlaySize: 8.875rem;
+    --VideoPlayFont: 1.125rem;
+  }
+}
