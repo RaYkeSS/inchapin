@@ -1,0 +1,20 @@
+services:
+  nextjs-standalone:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SITE_URL: ${SITE_URL:-https://inchapin.ru}
+        SITE_NAME: ${SITE_NAME:-INCHAPIN}
+    image: nextjs-standalone-image
+    container_name: nextjs-standalone-container
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      SITE_URL: ${SITE_URL:-https://inchapin.ru}
+      SITE_NAME: ${SITE_NAME:-INCHAPIN}
+      # Optional: lead-form delivery endpoint (CRM/email webhook).
+      # LEADS_WEBHOOK_URL: ${LEADS_WEBHOOK_URL:-}
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
