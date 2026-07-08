@@ -1,17 +1,33 @@
 @use "variables" as *;
+@use "mixins" as *;
+@use "reset";
 
 :root {
   --background: #{$background};
   --foreground: #{$foreground};
   --brand: #{$brand};
   --muted: #{$muted};
+  --text-muted: #{$text-muted};
   --brand-hover: #{$brand-hover};
   --brand-tint: #{$brand-tint};
+  --error: #{$error};
+  --on-brand: #{$on-brand};
+  --box-shadow: 7px 7px 30px 0px rgba(0, 0, 0, 0.2);
+
+  --font-regular: #{$regular};
+  --font-semibold: #{$semibold};
+  --font-bold: #{$bold};
+
+  --header-spacing: 1.75rem;
+  --header-height-base: 2.6875rem;
+  --header-height: calc(var(--header-height-base) + var(--header-spacing) * 2);
+  --logo-width: 9.75rem;
+  --header-gap: 2.5rem;
 }
 
-* { box-sizing: border-box; }
-
 html {
+  max-width: 1920px;
+  margin-inline: auto;
   font-family: var(--font-proxima-nova), ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -19,4 +35,94 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
+}
+
+.container {
+  max-width: 1920px;
+  margin-inline: auto;
+  padding-inline: 2.5rem;
+  @include lg-only {
+    padding-inline: 1.875rem;
+  }
+  @include md-only {
+    padding-inline: 2.5rem;
+  }
+  @include sm {
+    padding-inline: 1.25rem;
+  }
+  @include xxl {
+    padding-inline: 5rem;
+  }
+}
+
+.fadeInUp {
+  opacity: 0;
+  animation: fadeInUp 0.4s ease forwards;
+  animation-delay: 0.2s;
+}
+.delay2 {
+  animation-delay: 0.3s;
+}
+.delay3 {
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-container {
+  height: 100vh;
+  overflow: hidden;
+  @include sm {
+    height: auto;
+    overflow: visible;
+  }
+}
+
+[data-scrollbar] {
+  position: static !important;
+}
+
+.scrollbar-track {
+  z-index: 1000 !important;
+}
+
+@include xxl {
+  :root {
+    --header-spacing: 2.5rem;
+    --header-height-base: 3.1875rem;
+    --logo-width: 11.6875rem;
+    --header-gap: 2.8125rem;
+  }
+}
+
+@include lg-only {
+  :root {
+    --header-spacing: 1.875rem;
+    --header-height-base: 2.6875rem;
+    --header-gap: 1.5625rem;
+  }
+}
+
+@include max-md {
+  :root {
+    --header-spacing: 2.5rem;
+    --header-height-base: 2.6875rem;
+  }
+}
+
+@include sm {
+  :root {
+    --header-spacing: 1.25rem;
+    --header-height-base: 2.5625rem;
+    --logo-width: 8.3125rem;
+  }
 }
