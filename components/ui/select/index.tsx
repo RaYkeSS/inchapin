@@ -2,16 +2,21 @@
 
 import { useId, useMemo } from "react";
 
-import ReactSelect, {
-  type ClassNamesConfig,
-  type GroupBase,
-  type PlaceholderProps,
-  type Props,
+import dynamic from "next/dynamic";
+import type {
+  ClassNamesConfig,
+  GroupBase,
+  PlaceholderProps,
+  Props,
 } from "react-select";
 
 import { cn } from "~/lib/utils";
 
 import styles from "./select.module.scss";
+
+const ReactSelect = dynamic(() => import("react-select"), {
+  ssr: false,
+}) as unknown as typeof import("react-select").default;
 
 function Placeholder<
   Option,

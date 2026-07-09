@@ -22,5 +22,6 @@ export const HOME = {
   },
   video: {
     label: "Видео о проекте",
+    duration: "0:15 минут", // TODO: Выводить время из метаданных
   },
 };

@@ -9,6 +9,7 @@
   .aboutleft {
     grid-column: 1 / 6;
     .aboutTitle {
+      display: block;
       text-align: end;
       margin-bottom: 1.75rem;
     }

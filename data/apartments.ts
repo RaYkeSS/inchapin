@@ -29,6 +29,9 @@ export const APARTMENTS: Apartment[] = [
   },
 ];
 
-export const APARTMENTS_MAP: Record<string, Apartment> = Object.fromEntries(
-  APARTMENTS.map((apt) => [apt.slug, apt]),
-);
+export const APARTMENTS_MAP: Record<string, Apartment | undefined> =
+  Object.fromEntries(APARTMENTS.map((apt) => [apt.slug, apt]));
+
+export function getApartment(slug: string): Apartment | undefined {
+  return Object.hasOwn(APARTMENTS_MAP, slug) ? APARTMENTS_MAP[slug] : undefined;
+}

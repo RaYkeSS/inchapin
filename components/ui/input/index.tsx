@@ -1,6 +1,11 @@
 "use client";
 
-import { type ChangeEvent, ComponentPropsWithoutRef, useState } from "react";
+import {
+  type ChangeEvent,
+  ComponentPropsWithoutRef,
+  useId,
+  useState,
+} from "react";
 
 import { IMaskInput } from "react-imask";
 
@@ -19,16 +24,20 @@ type InputProps = Omit<ComponentPropsWithoutRef<"input">, "placeholder"> & {
 type PhoneChangeEvent = { target: { value: string; name?: string } };
 
 interface PhoneInputProps {
+  id?: string;
   value?: string;
   name?: string;
   lazy?: boolean;
   className?: string;
+  "aria-invalid"?: boolean;
+  "aria-describedby"?: string;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onChange?: (e: PhoneChangeEvent) => void;
 }
 
 const PhoneInput = ({
+  id,
   value,
   name,
   lazy,
@@ -36,9 +45,12 @@ const PhoneInput = ({
   onFocus,
   onBlur,
   onChange,
+  "aria-invalid": ariaInvalid,
+  "aria-describedby": ariaDescribedby,
 }: PhoneInputProps) => {
   return (
     <IMaskInput
+      id={id}
       mask="+{7} (000) 000-00-00"
       lazy={lazy}
       placeholderChar="_"
@@ -47,6 +59,8 @@ const PhoneInput = ({
       unmask={false}
       name={name}
       className={className}
+      aria-invalid={ariaInvalid}
+      aria-describedby={ariaDescribedby}
       onFocus={onFocus}
       onBlur={onBlur}
       onAccept={(v: string) => {
@@ -70,6 +84,9 @@ const Input = ({
   onChange,
   ...props
 }: InputProps) => {
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
+  const errorId = error ? `${inputId}-error` : undefined;
   const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -82,60 +99,54 @@ const Input = ({
     onBlur?.(e);
   };
 
-  if (mask === "phone") {
-    return (
-      <div
-        className={cn(
-          styles.field,
-          error && styles.fieldError,
-          containerClassName,
-        )}
-      >
-        <PhoneInput
-          className={cn(styles.input, error && styles.inputError, className)}
-          value={String(value ?? "")}
-          name={name}
-          lazy={!isFocused}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onChange={(e) => {
-            const event = {
-              target: { value: e.target.value, name },
-            } as ChangeEvent<HTMLInputElement>;
-            onChange?.(event);
-          }}
-        />
-        <label htmlFor={id} className={styles.label}>
-          {label}
-        </label>
-        {error && <span className={styles.error}>{error}</span>}
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className={cn(
-        styles.field,
-        error && styles.fieldError,
-        containerClassName,
-      )}
-    >
+  const control =
+    mask === "phone" ? (
+      <PhoneInput
+        id={inputId}
+        className={cn(styles.input, error && styles.inputError, className)}
+        value={String(value ?? "")}
+        name={name}
+        lazy={!isFocused}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={errorId}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onChange={(e) => {
+          const event = {
+            target: { value: e.target.value, name },
+          } as ChangeEvent<HTMLInputElement>;
+          onChange?.(event);
+        }}
+      />
+    ) : (
       <input
-        id={id}
+        id={inputId}
         name={name}
         value={value}
         className={cn(styles.input, error && styles.inputError, className)}
         placeholder=""
+        aria-invalid={error ? true : undefined}
+        aria-describedby={errorId}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onChange}
         {...props}
       />
-      <label htmlFor={id} className={styles.label}>
+    );
+
+  return (
+    <div
+      className={cn(styles.field, error && styles.fieldError, containerClassName)}
+    >
+      {control}
+      <label htmlFor={inputId} className={styles.label}>
         {label}
       </label>
-      {error && <span className={styles.error}>{error}</span>}
+      {error && (
+        <span id={errorId} className={styles.error}>
+          {error}
+        </span>
+      )}
     </div>
   );
 };

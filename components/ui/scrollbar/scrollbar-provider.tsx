@@ -10,9 +10,13 @@ import type { Scrollbar } from "smooth-scrollbar/scrollbar";
 
 const MOBILE_BREAKPOINT = 768;
 
-function getIsMobile(): boolean {
-  if (typeof window === "undefined") return false;
-  return window.innerWidth < MOBILE_BREAKPOINT;
+function shouldUseNativeScroll(): boolean {
+  if (typeof window === "undefined") return true;
+  const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  return isMobile || prefersReducedMotion;
 }
 
 interface ScrollbarProviderProps {
@@ -23,17 +27,22 @@ export function ScrollbarProvider({ children }: ScrollbarProviderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollbarRef = useRef<Scrollbar | null>(null);
   const pathname = usePathname();
-  const [isMobile, setIsMobile] = useState(false);
+  const [nativeScroll, setNativeScroll] = useState(true);
 
   useEffect(() => {
-    const check = () => setIsMobile(getIsMobile());
+    const check = () => setNativeScroll(shouldUseNativeScroll());
     check();
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    motion.addEventListener("change", check);
+    return () => {
+      window.removeEventListener("resize", check);
+      motion.removeEventListener("change", check);
+    };
   }, []);
 
   useEffect(() => {
-    if (isMobile || !containerRef.current) return;
+    if (nativeScroll || !containerRef.current) return;
 
     if (!scrollbarRef.current) {
       scrollbarRef.current = SmoothScrollbar.init(containerRef.current, {
@@ -45,10 +54,10 @@ export function ScrollbarProvider({ children }: ScrollbarProviderProps) {
       scrollbarRef.current?.destroy();
       scrollbarRef.current = null;
     };
-  }, [isMobile]);
+  }, [nativeScroll]);
 
   useEffect(() => {
-    if (isMobile) {
+    if (nativeScroll) {
       window.scrollTo(0, 0);
       return;
     }
@@ -59,13 +68,13 @@ export function ScrollbarProvider({ children }: ScrollbarProviderProps) {
       scrollbarRef.current?.update();
       scrollbarRef.current?.scrollTo(0, 0, 0);
     });
-  }, [pathname, isMobile]);
+  }, [pathname, nativeScroll]);
 
   return (
     <div
       ref={containerRef}
       className="scroll-container"
-      style={isMobile ? undefined : { height: "100vh", overflow: "hidden" }}
+      style={nativeScroll ? undefined : { height: "100vh", overflow: "hidden" }}
     >
       {children}
     </div>

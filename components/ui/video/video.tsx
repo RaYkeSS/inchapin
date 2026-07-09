@@ -4,8 +4,6 @@ import { useState } from "react";
 
 import Image from "next/image";
 
-import { useVideoMetadata } from "~/lib/useVideoMetadata";
-
 import Play from "~/components/icons/play";
 import { Text } from "~/components/ui/text";
 
@@ -14,11 +12,10 @@ import { HOME } from "~/data/home";
 import { VideoModal } from "./video-modal";
 import styles from "./video.module.scss";
 
+const VIDEO_SRC = "/videos/video.mp4";
+
 export function Video() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { videoRef, duration } = useVideoMetadata({
-    src: "/videos/video.mp4",
-  });
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -36,7 +33,7 @@ export function Video() {
             {HOME.video.label}
           </Text>
           <Text as="div" size="videoTime" className={styles.VideoTime}>
-            {duration}
+            {HOME.video.duration}
           </Text>
         </div>
         <div className={styles.VideoDecor}></div>
@@ -59,18 +56,7 @@ export function Video() {
         </div>
       </button>
 
-      <VideoModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        src="/videos/video.mp4"
-      />
-
-      <video
-        ref={videoRef}
-        src="/videos/video.mp4"
-        style={{ display: "none" }}
-        preload="metadata"
-      />
+      <VideoModal isOpen={isModalOpen} onClose={closeModal} src={VIDEO_SRC} />
     </>
   );
 }

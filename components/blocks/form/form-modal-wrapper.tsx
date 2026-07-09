@@ -19,7 +19,7 @@ export function FormModalWrapper() {
   };
 
   return (
-    <Modal onClose={handleClose} aria-label={UI.form.modalTitle}>
+    <Modal onClose={handleClose} ariaLabel={UI.form.modalTitle}>
       <Modal.Header>{UI.form.modalTitle}</Modal.Header>
       <Modal.Body>
         <Form />

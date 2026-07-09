@@ -62,7 +62,7 @@ export function BurgerMenu({
       </button>
 
       {open && (
-        <Modal onClose={handleClose} closing={closing}>
+        <Modal onClose={handleClose} closing={closing} ariaLabel={UI.menu.title}>
           <Modal.Header>{UI.menu.title}</Modal.Header>
           <Modal.Body>
             <nav className={styles.menuNav}>

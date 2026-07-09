@@ -15,9 +15,10 @@ import { submitLead } from "./actions";
 import styles from "./form.module.scss";
 import {
   FORM_DEFAULTS,
-  type LeadData,
+  HONEYPOT_FIELD,
+  type LeadFormData,
   type SubmitResult,
-  formSchema,
+  leadFormSchema,
 } from "./schema";
 
 const Form = () => {
@@ -25,15 +26,16 @@ const Form = () => {
 
   const {
     control,
+    register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<LeadData>({
-    resolver: zodResolver(formSchema),
+  } = useForm<LeadFormData>({
+    resolver: zodResolver(leadFormSchema),
     defaultValues: FORM_DEFAULTS,
   });
 
-  const onSubmit = async (data: LeadData) => {
+  const onSubmit = async (data: LeadFormData) => {
     const res = await submitLead(data);
     setResult(res);
     if (res.ok) reset();
@@ -49,6 +51,15 @@ const Form = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <input
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className={styles.honeypot}
+        {...register(HONEYPOT_FIELD)}
+      />
+
       <Controller
         name="name"
         control={control}

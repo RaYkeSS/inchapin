@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { APARTMENTS_MAP } from "~/data/apartments";
+import { getApartment } from "~/data/apartments";
 
 interface ApartmentPageProps {
   params: Promise<{ slug: string }>;
@@ -11,7 +11,7 @@ export async function generateMetadata({
   params,
 }: ApartmentPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const apartment = APARTMENTS_MAP[slug];
+  const apartment = getApartment(slug);
 
   if (!apartment) {
     return { title: "Квартира не найдена" };
@@ -25,7 +25,7 @@ export async function generateMetadata({
 
 export default async function ApartmentPage({ params }: ApartmentPageProps) {
   const { slug } = await params;
-  const apartment = APARTMENTS_MAP[slug];
+  const apartment = getApartment(slug);
 
   if (!apartment) {
     notFound();

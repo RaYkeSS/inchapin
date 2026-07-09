@@ -20,6 +20,14 @@
   }
 }
 
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .btn {
   margin: auto;
   font-size: 0.9375rem;

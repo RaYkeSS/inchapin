@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import Logo from "~/components/icons/logo/logo";
 import Phone from "~/components/icons/phone";
-import { BurgerMenu } from "~/components/ui/burger-menu";
+import { BurgerMenu } from "~/components/layout/burger-menu";
 import { Button } from "~/components/ui/button";
 
 import { CONTACTS } from "~/data/contacts";
